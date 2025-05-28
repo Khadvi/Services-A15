@@ -1,12 +1,32 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: false
 })
 export class AppComponent {
-  title = 'Services-A15';
+  accounts = [
+    {
+      name: 'Master Account',
+      status: 'active'
+    },
+    {
+      name: 'Testaccount',
+      status: 'inactive'
+    },
+    {
+      name: 'Hidden Account',
+      status: 'unknown'
+    }
+  ];
+
+  onAccountAdded(newAccount: {name: string, status: string}) {
+    this.accounts.push(newAccount);
+  }
+
+  onStatusChanged(updateInfo: {id: number, newStatus: string}) {
+    this.accounts[updateInfo.id].status = updateInfo.newStatus;
+  }
 }
